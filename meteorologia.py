@@ -14,4 +14,7 @@ respuesta = requests.get(url, params=parametros, timeout=30)
 respuesta.raise_for_status()
 datos = respuesta.json()
 
-print(datos)
+print(datos.keys())
+diarios = datos["daily"]
+print(diarios.keys())
+print(datos["latitude"], datos["longitude"])
