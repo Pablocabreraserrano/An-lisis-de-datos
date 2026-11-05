@@ -26,3 +26,14 @@ print(type(datos['daily']['temperature_2m_mean']))
 
 print(len(datos['daily']['time']))
 print(len(datos['daily']['temperature_2m_mean']))
+
+
+print("Primera fecha:", diarios["time"][0])
+print("Temperatura media del primer día:", diarios["temperature_2m_mean"][0])
+print("Temperatura máxima del último día:", diarios["temperature_2m_max"][-1])
+
+if "lluvia" in datos:
+    print("Hay datos diarios")
+else:
+    print("No hay datos diarios")
+
