@@ -18,3 +18,11 @@ print(datos.keys())
 diarios = datos["daily"]
 print(diarios.keys())
 print(datos["latitude"], datos["longitude"])
+print(datos["daily_units"])
+
+print(type(datos['daily']))
+print(type(datos['daily']['time']))
+print(type(datos['daily']['temperature_2m_mean']))
+
+print(len(datos['daily']['time']))
+print(len(datos['daily']['temperature_2m_mean']))
