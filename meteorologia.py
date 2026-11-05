@@ -37,3 +37,40 @@ if "lluvia" in datos:
 else:
     print("No hay datos diarios")
 
+
+temperaturas = datos['daily']["temperature_2m_mean"]
+print(temperaturas)
+
+print("Suma:", sum(temperaturas))
+print("Media:", sum(temperaturas) / len(temperaturas))
+print("Máxima:", max(temperaturas))
+print("Mínima:", min(temperaturas))
+
+print(temperaturas[0:5])
+print(temperaturas[-5:])
+
+print(len(temperaturas))
+
+print("Diferencia entre la temperatura máxima u mínima:" , max(temperaturas) - min(temperaturas))
+
+print("Días que superaron los 15 grados:", len([t for t in temperaturas if t > 15]))
+print("Días que estuvieron por debajo de 10 grados:", len([t for t in temperaturas if t < 10]))
+
+superiores_15 = [t for t in temperaturas if t > 15]
+inferiores_10 = [t for t in temperaturas if t < 10]
+
+print(superiores_15)
+print(inferiores_10)
+
+
+print(any(t > 20 for t in temperaturas))
+print(all(t > 0 for t in temperaturas))
+
+redondeadas = [round(t,1) for t in temperaturas]
+print("Redondeadas:", redondeadas)
+
+print(sorted(temperaturas))
+
+media = sum(temperaturas) / len(temperaturas)
+diferencias = [round(t - media, 1) for t in temperaturas]
+print("Diferencias con la media:", diferencias)
