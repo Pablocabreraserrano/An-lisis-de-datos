@@ -128,8 +128,8 @@ print("Fríos:", tipo_dia.count("frío"))
 print("Templados:", tipo_dia.count("templado"))
 print("Cálidos:", tipo_dia.count("cálido"))
 
-# Fase 6 -> Relaciona cada valor con su fecha
-# Mostrar un registro completo
+print("\n--- Fase 6 -> Relaciona cada valor con su fecha ---")
+print("\n--- Mostrar un registro completo ---")
 registros = []
 for f, med, mx, mn in zip(diarios["time"], diarios["temperature_2m_mean"],
                           diarios["temperature_2m_max"], diarios["temperature_2m_min"]):
@@ -138,10 +138,12 @@ for f, med, mx, mn in zip(diarios["time"], diarios["temperature_2m_mean"],
 print("Número de registros:", len(registros))
 print("Primer registro:", registros[0])
 print("Mínima del día 1:", registros[0]["minima"])
-# Localizar el día con la media más alta
+
+print("\n--- Localizar el día con la media más alta ---")
 dia_mas_calido = max(registros, key=lambda r: r["media"])
 print("Día con la media más alta:", dia_mas_calido)
-# Amplitud térmica diaria
+
+print("\n--- Amplitud térmica diaria ---")
 for r in registros:
     r["amplitud"] = round(r["maxima"] - r["minima"], 1)
 
@@ -149,12 +151,12 @@ print("Primer registro con amplitud:", registros[0])
 
 print("\n--- Fase 7 -> Analiza el periodo ---")
 def mostrar_estadistica(nombre, lista):
-    print("---", nombre, "---")
+    print("\n---", nombre, "---")
     media = sum(lista) / len(lista)
-    print("Media:", round(media, 1))
+    print("Media:", round(media, 2))
     print("Maxima:", max(lista))
     print("Minima:", min(lista))
-    print("Rango:", round(max(lista) - min(lista), 1))
+    print("Rango:", round(max(lista) - min(lista), 2))
 
     ordenadas = sorted(lista)
     centro = len(ordenadas) // 2
@@ -181,13 +183,13 @@ mostrar_estadistica("Mínimas", diarios["temperature_2m_min"])
 # Las mínimas son las que más varían (desviación típica 3.17), porque las noches despejadas se enfrían mucho y las nubladas no tanto.
 
 print("\n--- Fase 8 -> Estudia la evolución temporal ---")
-print("Muestra las temperaturas medias junto con sus fechas")
+print("\n--- Muestra las temperaturas medias junto con sus fechas ---")
 for r in registros:
     print(r["fecha"], r["media"])
 # Recorro las fichas de "registros" con un for y muestro la fecha
 # Recorro las fichas de "registros" con un for y muestro la fecha y la temperatura media de cada día, para ver cómo cambia a lo largo del mes.
 
-print("\nFiltra la primera semana y la segunda quincena")
+print("\n--- Filtra la primera semana y la segunda quincena ---")
 primera_semana = registros[0:7]
 segunda_quincena = registros[15:]
 print("Días de la primera semana:", len(primera_semana))
@@ -195,7 +197,7 @@ print("Días de la segunda quincena:", len(segunda_quincena))
 print("Empieza:", segunda_quincena[0]["fecha"], "- Termina:", segunda_quincena[-1]["fecha"])
 # Con slicing separo partes del mes. La primera semana son los índices 0 a 6 (días 1 a 7) y la segunda quincena empieza en el índice 15 (día 16) y llega hasta el final: 31 días en total.
 
-print("\nCalcula las variaciones entre días consecutivos e identifica el mayor aumento y descenso")
+print("\n--- Calcula las variaciones entre días consecutivos e identifica el mayor aumento y descenso ---")
 for i in range(1, len(registros)):
     registros[i]["variacion"] = round(registros[i]["media"] - registros[i - 1]["media"], 1)
 
@@ -212,7 +214,7 @@ print("Mayor bajada:", mayor_bajada["fecha"], mayor_bajada["variacion"])
 # La mayor subida fue el 21 (+5.3 °C) y la mayor bajada el 2 (-5.7 °C).
 
 
-print("\nCalcula una media móvil de tres días y compárala con los valores originales")
+print("\n--- Calcula una media móvil de tres días y compárala con los valores originales ---")
 medias_moviles = [round(sum(temperaturas[i:i+3]) / 3, 2) for i in range(len(temperaturas) - 2)]
 print("Media móvil (3 días):", medias_moviles)
 print("Número de ventanas:", len(medias_moviles))
@@ -220,7 +222,7 @@ print("Número de ventanas:", len(medias_moviles))
 # La "ventana" de 3 días se mueve de uno en uno, así que hay 31 - 2 = 29 ventanas.
 # (Aquí va tu conclusión de la rampa: "La media móvil cambia de forma más suave...")
 
-print("\nDivide el periodo en semanas y calcula la media de cada una")
+print("\n--- Divide el periodo en semanas y calcula la media de cada una ---")
 for i in range(0, len(temperaturas), 7):
     semana = temperaturas[i:i+7]
     media_semana = sum(semana) / len(semana)
